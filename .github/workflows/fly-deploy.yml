@@ -12,6 +12,12 @@ jobs:
     concurrency: deploy-group    # optional: ensure only one action runs at a time
     steps:
       - uses: actions/checkout@v4
+      - name: Generate fly.toml from template
+        run: envsubst < fly.toml.template > fly.toml
+        env:
+          FLY_APP: ${{ vars.FLY_APP }}
+          LITESTREAM_REPLICA_ENDPOINT: ${{ vars.LITESTREAM_REPLICA_ENDPOINT }}
+          LITESTREAM_REPLICA_BUCKET: ${{ vars.LITESTREAM_REPLICA_BUCKET }}
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
