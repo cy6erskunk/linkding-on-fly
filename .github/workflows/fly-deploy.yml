@@ -15,7 +15,7 @@ jobs:
       - name: Generate fly.toml from template
         run: envsubst < fly.toml.template > fly.toml
         env:
-          FLY_APP: ${{ vars.FLY_APP }}
+          APP_NAME: ${{ vars.APP_NAME }}
           LITESTREAM_REPLICA_ENDPOINT: ${{ vars.LITESTREAM_REPLICA_ENDPOINT }}
           LITESTREAM_REPLICA_BUCKET: ${{ vars.LITESTREAM_REPLICA_BUCKET }}
       - uses: superfly/flyctl-actions/setup-flyctl@master
